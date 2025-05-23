@@ -16,14 +16,20 @@ form.addEventListener('submit', (e) => {
 function renderList() {
   list.innerHTML = '';
   manhwas.sort((a, b) => b.rating - a.rating);
-  manhwas.forEach(m => {
+  manhwas.forEach((m, index) => {
     const el = document.createElement('div');
     el.className = 'manhwa';
     el.innerHTML = `
       <h3>${m.title}</h3>
       <p>${m.desc}</p>
       <div class="stars">Rating: ${'⭐'.repeat(m.rating)}</div>
+      <button onclick="deleteManhwa(${index})">Delete</button>
     `;
     list.appendChild(el);
   });
+}
+
+function deleteManhwa(index) {
+  manhwas.splice(index, 1);
+  renderList();
 }
